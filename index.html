@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmobiliaria Bronchis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta de colores para Seriedad y Confianza */
+            --color-primary-dark: #1a374d;   /* Azul muy oscuro para encabezados y fondos importantes */
+            --color-primary-medium: #2e6099; /* Azul medio para acentos y botones */
+            --color-text-dark: #333333;      /* Gris casi negro para texto principal */
+            --color-text-light: #555555;     /* Gris oscuro para texto secundario */
+            --color-background-light: #f4f7f6; /* Fondo de página muy claro */
+            --color-background-white: #ffffff; /* Fondo de secciones */
+            --color-border: #e0e0e0;         /* Gris suave para bordes */
+            --color-success: #28a745;        /* Verde discreto para precios */
+            --color-accent-soft: #eef5fb;    /* Azul muy claro para fondos sutiles */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Fuente más formal */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+            line-height: 1.6; /* Mayor espaciado entre líneas para legibilidad */
+        }
+        .page {
+            min-height: 100vh;
+            padding: 50px 30px; /* Más padding vertical */
+            border-bottom: 1px solid var(--color-border);
+            scroll-margin-top: 50px;
+            background-color: var(--color-background-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Sombra más sutil */
+            margin-bottom: 40px; /* Más espacio entre secciones */
+            border-radius: 4px; /* Bordes menos redondeados para seriedad */
+            max-width: 1000px; /* Ancho máximo de la página */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px; /* Más espacio */
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--color-primary-medium); /* Línea más fina y elegante */
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos principales */
+            color: var(--color-primary-dark);
+            margin: 0;
+            font-size: 3.5em; /* Tamaño de letra grande pero elegante */
+            font-weight: 700; /* Negrita */
+            letter-spacing: -0.5px; /* Ajuste sutil del espaciado entre letras */
+        }
+        .header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8em; /* Tamaño de letra para h2 */
+            color: var(--color-primary-dark);
+            margin-top: 0;
+        }
+        .content {
+            max-width: 800px; /* Contenido central más definido */
+            margin: 0 auto;
+        }
+        .image-placeholder {
+            text-align: center;
+            margin: 40px 0;
+            padding: 0; /* Sin padding en el placeholder de imagen */
+            background-color: transparent; /* Fondo transparente */
+            border-radius: 0; /* Sin bordes redondeados */
+            border: none; /* Sin borde */
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0; /* Sin bordes redondeados */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra sutil para la imagen */
+        }
+
+        /* Estilos para el equipo de trabajo */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Mínimo más pequeño */
+            gap: 35px; /* Más espacio entre miembros */
+            margin-top: 50px;
+        }
+        .team-member {
+            text-align: center;
+            background-color: var(--color-background-white);
+            padding: 30px; /* Más padding */
+            border-radius: 6px; /* Bordes suaves pero no muy redondeados */
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08); /* Sombra profesional */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px); /* Movimiento sutil */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .team-member img {
+            width: 140px; /* Tamaño de la imagen del trabajador */
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%; /* Imágenes circulares */
+            border: 3px solid var(--color-primary-medium); /* Borde de color secundario */
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra para las fotos de perfil */
+        }
+        .team-member h3 {
+            color: var(--color-primary-dark);
+            margin-top: 10px;
+            margin-bottom: 8px;
+            font-size: 1.6em;
+            font-weight: 500;
+        }
+        .team-member p {
+            color: var(--color-text-light);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .team-member .cv-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: var(--color-primary-medium);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .team-member .cv-link:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Estilos generales para productos (tarjetas) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; /* Más espacio */
+            margin-top: 50px;
+        }
+        .product-item {
+            border: 1px solid var(--color-border);
+            padding: 0; /* Quitamos el padding aquí para que la imagen ocupe todo el ancho arriba */
+            text-align: left; /* Alineado a la izquierda para información */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 6px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: var(--color-background-white);
+            overflow: hidden; /* Asegura que la imagen no se salga */
+        }
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .product-item img {
+            width: 100%;
+            height: 220px; /* Altura fija para todas las imágenes de producto */
+            object-fit: cover; /* Recorta la imagen para que encaje sin distorsión */
+            margin-bottom: 0; /* Sin margen debajo de la imagen */
+            border-radius: 6px 6px 0 0; /* Solo bordes superiores redondeados */
+        }
+        .product-info {
+            padding: 20px; /* Padding para el texto debajo de la imagen */
+        }
+        .product-item h3 {
+            color: var(--color-primary-dark);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+        .product-item p {
+            font-size: 0.9em;
+            color: var(--color-text-light);
+            margin-bottom: 12px;
+        }
+        .product-item strong {
+            color: var(--color-success);
+            font-size: 1.3em; /* Precio un poco más grande */
+            display: block;
+            margin-top: 15px;
+            font-weight: 700;
+        }
+        .back-to-index {
+            display: block;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--color-primary-medium);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 30px;
+            border: 2px solid var(--color-primary-medium);
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+        .back-to-index:hover {
+            background-color: var(--color-primary-medium);
+            color: var(--color-background-white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Eliminación del contenedor de GIFs para un estilo más serio */
+        .gif-container {
+            display: none; /* Esto oculta completamente los GIFs */
+        }
+
+        /* Estilos específicos para la página de contacto */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px; /* Más espacio */
+            margin-top: 40px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start; /* Alineación al inicio para textos largos */
+            gap: 25px;
+            font-size: 1.05em;
+            color: var(--color-text-dark);
+        }
+        .contact-item img {
+            width: 40px; /* Iconos de contacto */
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-accent-soft);
+            padding: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            flex-shrink: 0; /* Evita que el icono se encoja */
+        }
+        .contact-item span {
+            display: flex;
+            align-items: center;
+            min-height: 40px; /* Asegura que el texto se alinee con el icono */
+        }
+        .contact-item a {
+            color: var(--color-primary-medium);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .contact-item a:hover {
+            color: var(--color-primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Estilos para lista del índice */
+        #indice ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px; /* Más espacio */
+            margin-top: 50px;
+        }
+        #indice li a {
+            display: block;
+            background-color: var(--color-accent-soft);
+            color: var(--color-primary-dark);
+            padding: 20px 35px; /* Más padding */
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05em;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        #indice li a:hover {
+            background-color: var(--color-primary-medium);
+            color: var(--color-background-white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Estilos para el texto general en las secciones */
+        .content p {
+            font-size: 1.05em;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+        .content article h3 {
+            color: var(--color-primary-dark);
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--color-border);
+            padding-bottom: 5px;
+        }
+        .content ul li {
+            font-size: 1.05em;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+        }
+        .content ul strong {
+            color: var(--color-primary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    </div> <div class="fixed-mascot-container">
+        <img src="images/mascot_1.gif" alt="Mascota Bronchis 1" class="mascot-gif">
+        <img src="images/mascot_2.gif" alt="Mascota Bronchis 2" class="mascot-gif">
+    </div>
+
+</body>
+</html>
+
+    <section id="principal" class="page">
+        <div class="header">
+            <h1>¡Bienvenido a Inmobiliaria Bronchis!</h1>
+        </div>
+        <div class="content">
+            <div class="image-placeholder">
+                <img src="images/bronchis_logo.png" alt="Logo Inmobiliaria Bronchis">
+                <p>Tu futuro hogar comienza aquí.</p>
+            </div>
+            <p>En Inmobiliaria Bronchis, te ayudamos a encontrar la propiedad de tus sueños, ya sea para comprar, vender o alquilar. Con años de experiencia en el sector y un equipo dedicado, garantizamos un servicio de calidad y adaptado a tus necesidades.</p>
+        </div>
+        <a href="#indice" class="back-to-index">Ir al Índice</a>
+    </section>
+
+    ---
+
+    <section id="indice" class="page">
+        <div class="header">
+            <h2>Índice de Contenidos</h2>
+        </div>
+        <div class="content">
+            <ul>
+                <li><a href="#ubicacion">Ubicación de Nuestra Oficina</a></li>
+                <li><a href="#trabajadores">Conoce a Nuestro Equipo</a></li>
+                <li><a href="#productos">Nuestras Propiedades Destacadas</a></li>
+                <li><a href="#ofertas">Ofertas Especiales</a></li>
+                <li><a href="#noticias">Noticias del Sector Inmobiliario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#categorias">Explora Nuestras Categorías de Propiedades</a></li>
+                <li><a href="#pisos">Pisos y Apartamentos</a></li>
+                <li><a href="#chalets">Chalets y Villas</a></li>
+                <li><a href="#locales">Locales y Oficinas</a></li>
+            </ul>
+        </div>
+        <a href="#principal" class="back-to-index">Volver a Principal</a>
+    </section>
+
+    ---
+
+    <section id="ubicacion" class="page">
+    <div class="header">
+        <h2>¿Dónde Nos Encontramos?</h2>
+    </div>
+    <div class="content">
+        <p>Visítanos en nuestra oficina principal. Estaremos encantados de atenderte y resolver todas tus dudas sobre el mercado inmobiliario.</p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.0256301363593!2d-3.6059196235829534!3d37.1716657466712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd71fc9642bd4bb1%3A0x72da82acf236671a!2sC.%20Recogidas%2C%2036%2C%20Ronda%2C%2018002%20Granada!5e1!3m2!1ses!2ses!4v1750098878736!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p>Nuestra Dirección: C. Recogidas, 36, Ronda, 18002 Granada</p>
+        </div>
+    </div>
+    <a href="#indice" class="back-to-index">Volver al Índice</a>
+</section>
+</div>
+    <a href="#indice" class="back-to-index">Volver al Índice</a>
+</section>
+
+    ---
+
+    <section id="trabajadores" class="page">
+        <div class="header">
+            <h2>Conoce a Nuestro Equipo Profesional</h2>
+        </div>
+        <div class="content">
+            <p>El equipo de Inmobiliaria Bronchis está formado por expertos comprometidos con encontrar la solución perfecta para tus necesidades inmobiliarias. Profesionales que te acompañarán en cada paso.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/photo_hugo.jpg" alt="Foto de Hugo Mrowczynski">
+                    <h3>Hugo Mrowczynski</h3>
+                    <p><strong>CEO y Fundador</strong></p>
+                    <p>Lidera la visión estratégica y el crecimiento de Bronchis, garantizando la excelencia en cada paso del negocio.</p>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="cv-link">Ver CV</a>
+                </div>
+
+                <div class="team-member">
+                    <img src="images/photo_ana.jpg" alt="Foto de Ana García">
+                    <h3>Ana García</h3>
+                    <p><strong>Especialista en Venta Residencial</strong></p>
+                    <p>Experta en propiedades residenciales, te guiará con profesionalidad para encontrar el hogar ideal para tu familia.</p>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="cv-link">Ver CV</a>
+                </div>
+
+                <div class="team-member">
+                    <img src="images/photo_javier.jpg" alt="Foto de Javier Pérez">
+                    <h3>Javier Pérez</h3>
+                    <p><strong>Consultor de Alquileres</strong></p>
+                    <p>Dedicado a facilitar procesos de alquiler eficientes y satisfactorios, asegurando la tranquilidad de todas las partes.</p>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="cv-link">Ver CV</a>
+                </div>
+
+                <div class="team-member">
+                    <img src="images/photo_marta.jpg" alt="Foto de Marta Ruiz">
+                    <h3>Marta Ruiz</h3>
+                    <p><strong>Asesora Legal Inmobiliaria</strong></p>
+                    <p>Ofrece respaldo legal y asegura que todas las transacciones sean transparentes, seguras y conforme a la normativa vigente.</p>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="cv-link">Ver CV</a>
+                </div>
+            </div>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="productos" class="page">
+        <div class="header">
+            <h2>Nuestras Propiedades Destacadas</h2>
+        </div>
+        <div class="content">
+            <p>Explora una selección de las propiedades más interesantes de nuestro portfolio. ¡Descubre tu próxima inversión o el hogar de tus sueños!</p>
+            <div class="image-placeholder">
+                <img src="images/featured_properties.jpg" alt="Imagen de propiedades destacadas">
+            </div>
+            <p>Para explorar todas nuestras opciones, te invitamos a navegar por las diferentes categorías.</p>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="ofertas" class="page">
+        <div class="header">
+            <h2>¡Ofertas Exclusivas!</h2>
+        </div>
+        <div class="content">
+            <p>No pierdas la oportunidad de aprovechar nuestras promociones y descuentos especiales. Es el momento ideal para realizar una inversión inteligente.</p>
+            <div class="image-placeholder">
+                <img src="images/special_offers.jpeg" alt="Imagen de ofertas especiales">
+            </div>
+            <ul>
+                <li><strong>Descuento del 5%</strong> en la comisión de venta para las 10 primeras propiedades listadas este mes.</li>
+                <li><strong>Asesoramiento hipotecario gratuito</strong> al comprar cualquier propiedad de nuestro catálogo premium.</li>
+                <li><strong>Tasación gratuita</strong> para propiedades en el centro de la ciudad, valorando tu patrimonio sin coste.</li>
+            </ul>
+            <p>Contacta con nosotros para obtener más detalles sobre estas increíbles oportunidades y cómo puedes beneficiarte.</p>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+        <audio id="trumpetSound" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const trumpet = document.getElementById('trumpetSound');
+                if (window.location.hash === '#ofertas') {
+                    const playPromise = trumpet.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            // La reproducción automática comenzó.
+                        }).catch(error => {
+                            console.log("La reproducción automática de sonido ha sido bloqueada por el navegador. " + error);
+                        });
+                    }
+                }
+            });
+        </script>
+    </section>
+
+    ---
+
+    <section id="noticias" class="page">
+        <div class="header">
+            <h2>Noticias del Sector Inmobiliario</h2>
+        </div>
+        <div class="content">
+            <p>Mantente al día con las últimas novedades, análisis y tendencias del mercado inmobiliario. Información relevante para tus decisiones.</p>
+            <div class="image-placeholder">
+                <img src="images/real_estate_news.webp" alt="Imagen de noticias">
+            </div>
+            <article>
+                <h3>El Auge de la Vivienda Sostenible en 2025</h3>
+                <p>Las propiedades con certificación energética A y B están viendo un aumento significativo en la demanda, marcando una clara tendencia hacia la sostenibilidad y eficiencia energética en el sector.</p>
+                <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Ver video sobre tendencias de vivienda sostenible [YouTube]</a></p>
+            </article>
+            <article>
+                <h3>Análisis del Mercado de Alquiler en las Grandes Ciudades</h3>
+                <p>Un estudio reciente revela cómo la oferta y la demanda están impactando los precios de alquiler en las principales urbes, ofreciendo perspectivas clave para propietarios e inquilinos.</p>
+            </article>
+            <article>
+                <h3>Consejos para Vender Tu Propiedad Rápidamente y con Éxito</h3>
+                <p>Desde la preparación de la casa hasta la negociación final, te ofrecemos las mejores estrategias y herramientas para optimizar el proceso de venta de tu propiedad.</p>
+            </article>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="contacto" class="page">
+        <div class="header">
+            <h2>Contáctanos</h2>
+        </div>
+        <div class="content">
+            <p>Estamos a tu disposición para cualquier consulta o necesidad. No dudes en ponerte en contacto con nosotros a través de los siguientes medios:</p>
+            <div class="image-placeholder">
+                <img src="images/contact_image.jpg" alt="Imagen de contacto">
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="images/email_icon.webp" alt="Icono de Email">
+                    <span>Email: <a href="mailto:info@bronchis.com">info@bronchis.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <img src="images/phone_icon.png" alt="Icono de Teléfono">
+                    <span>Teléfono: +34 912 345 678</span>
+                </div>
+                </div>
+            </div>
+            <p>Horario de atención: Lunes a Viernes, de 9:00 a 18:00 horas.</p>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="categorias" class="page">
+        <div class="header">
+            <h2>Categorías de Propiedades</h2>
+        </div>
+        <div class="content">
+            <p>Explora nuestras propiedades por tipo y encuentra exactamente lo que buscas. Tenemos opciones para todos los gustos y necesidades del mercado.</p>
+            <div class="image-placeholder">
+                <img src="images/categories_image.jpeg" alt="Imagen de categorías de propiedades">
+            </div>
+            <ul>
+                <li><a href="#pisos">Pisos y Apartamentos</a></li>
+                <li><a href="#chalets">Chalets y Villas</a></li>
+                <li><a href="#locales">Locales y Oficinas</a></li>
+            </ul>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="pisos" class="page">
+        <div class="header">
+            <h2>Pisos y Apartamentos</h2>
+        </div>
+        <div class="content">
+            <p>Una cuidada selección de los mejores pisos y apartamentos disponibles, ideales tanto para familias en busca de un hogar como para inversores.</p>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/downtown_apartment.jpeg" alt="Piso en el Centro">
+                    <div class="product-info">
+                        <h3>Piso en el Centro Histórico</h3>
+                        <p>3 habitaciones, 2 baños. Un espacio luminoso y completamente reformado, listo para entrar a vivir.</p>
+                        <strong>Precio: 350.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/luxury_flat.jpeg" alt="Apartamento de Lujo">
+                    <div class="product-info">
+                        <h3>Apartamento de Lujo con Vistas</h3>
+                        <p>2 habitaciones, 2 baños. Disfruta de una amplia terraza y acceso a piscina comunitaria, con vistas espectaculares.</p>
+                        <strong>Precio: 580.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/modern_studio.jpeg" alt="Estudio Moderno">
+                    <div class="product-info">
+                        <h3>Estudio Moderno en Zona Universitaria</h3>
+                        <p>1 habitación, 1 baño. Diseño vanguardista y funcionalidad, perfecto para estudiantes o profesionales jóvenes.</p>
+                        <strong>Precio: 180.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/family_apartment.jpeg" alt="Piso Familiar">
+                    <div class="product-info">
+                        <h3>Piso Familiar en Barrio Tranquilo</h3>
+                        <p>4 habitaciones, 2 baños. Ubicado en una zona residencial, cerca de colegios y amplios parques para disfrutar en familia.</p>
+                        <strong>Precio: 420.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/exclusive_penthouse.jpeg" alt="Ático Exclusivo">
+                    <div class="product-info">
+                        <h3>Ático Exclusivo con Solárium</h3>
+                        <p>3 habitaciones, 3 baños. Un lujo con vistas panorámicas y una gran terraza privada para tus momentos de ocio.</p>
+                        <strong>Precio: 750.000 €</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="chalets" class="page">
+        <div class="header">
+            <h2>Chalets y Villas</h2>
+        </div>
+        <div class="content">
+            <p>Descubre nuestra exclusiva selección de chalets y villas, perfectos para quienes buscan amplitud, privacidad y un estilo de vida superior.</p>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/garden_chalet.jpeg" alt="Chalet con Jardín">
+                    <div class="product-info">
+                        <h3>Chalet Independiente con Amplio Jardín</h3>
+                        <p>5 habitaciones, 3 baños. Incluye piscina privada y zona de barbacoa, ideal para el ocio familiar.</p>
+                        <strong>Precio: 650.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/luxury_villa.jpeg" alt="Villa de Lujo">
+                    <div class="product-info">
+                        <h3>Villa de Lujo con Vistas al Mar</h3>
+                        <p>6 habitaciones, 5 baños. Una propiedad excepcional cerca de la playa y un campo de golf, para los más exigentes.</p>
+                        <strong>Precio: 1.200.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/modern_townhouse.jpeg" alt="Adosado Moderno">
+                    <div class="product-info">
+                        <h3>Adosado Moderno en Urbanización</h3>
+                        <p>4 habitaciones, 3 baños. Disfruta de la tranquilidad y las zonas comunes de una urbanización, con piscina incluida.</p>
+                        <strong>Precio: 490.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/country_house.jpeg" alt="Casa de Campo">
+                    <div class="product-info">
+                        <h3>Casa de Campo con Terreno</h3>
+                        <p>3 habitaciones, 2 baños. Un refugio perfecto para amantes de la naturaleza y la tranquilidad, con amplias posibilidades.</p>
+                        <strong>Precio: 320.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/cozy_bungalow.jpeg" alt="Bungalow Acogedor">
+                    <div class="product-info">
+                        <h3>Bungalow Acogedor con Patio</h3>
+                        <p>2 habitaciones, 1 baño. Pequeño y funcional, ideal para una pareja o como inversión para alquiler vacacional.</p>
+                        <strong>Precio: 280.000 €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+    ---
+
+    <section id="locales" class="page">
+        <div class="header">
+            <h2>Locales y Oficinas</h2>
+        </div>
+        <div class="content">
+            <p>Encuentra el espacio perfecto para tu negocio o tu equipo. Oficinas y locales comerciales en ubicaciones estratégicas para tu éxito.</p>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/commercial_premise.jpeg" alt="Local Comercial">
+                    <div class="product-info">
+                        <h3>Local Comercial en Zona Peatonal</h3>
+                        <p>120 m², con gran escaparate. Ideal para cualquier tipo de comercio con alta afluencia de público.</p>
+                        <strong>Precio: 450.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/corporate_office.jpeg" alt="Oficina en Edificio Corporativo">
+                    <div class="product-info">
+                        <h3>Oficina en Edificio Corporativo</h3>
+                        <p>80 m², muy luminosa y con sala de reuniones. Ubicada en un centro de negocios de prestigio.</p>
+                        <strong>Precio: 320.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/industrial_warehouse.jpeg" alt="Nave Industrial">
+                    <div class="product-info">
+                        <h3>Nave Industrial con Oficinas</h3>
+                        <p>500 m² de nave y 100 m² de oficinas. Perfecta para logística o producción, con excelente acceso a autovías.</p>
+                        <strong>Precio: 780.000 €</strong>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/coworking_space.jpeg" alt="Espacio Coworking">
+                    <div class="product-info">
+                        <h3>Espacio para Coworking en el Centro</h3>
+                        <p>200 m², diáfano y versátil, adaptable a diferentes distribuciones para un ambiente de trabajo colaborativo.</p>
+                        <strong>Precio: 550.000 €</p>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/business_ground_floor.jpeg" alt="Bajo con Negocio">
+                    <div class="product-info">
+                        <h3>Bajo Comercial con Licencia de Restaurante</h3>
+                        <p>80 m², cocina equipada y terraza exterior. Oportunidad ideal para emprendedores del sector hostelero.</p>
+                        <strong>Precio: 620.000 €</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#indice" class="back-to-index">Volver al Índice</a>
+    </section>
+
+</body>
+</html>
